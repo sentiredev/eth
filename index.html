@@ -7,22 +7,20 @@
 </head>
 <body>
     <h1>Ethereum Mining</h1>
-    <button onclick="startMining()">Start Mining</button>
-    <button onclick="stopMining()">Stop Mining</button>
-    <p id="status"></p>
+    <p id="status">Initializing...</p>
 
     <script>
         async function startMining() {
-            const response = await fetch('/start-mining', { method: 'POST' });
-            const data = await response.json();
-            document.getElementById('status').innerText = data.message;
+            try {
+                const response = await fetch('/start-mining', { method: 'POST' });
+                const data = await response.json();
+                document.getElementById('status').innerText = data.message;
+            } catch (error) {
+                document.getElementById('status').innerText = 'Error starting mining';
+            }
         }
 
-        async function stopMining() {
-            const response = await fetch('/stop-mining', { method: 'POST' });
-            const data = await response.json();
-            document.getElementById('status').innerText = data.message;
-        }
+        window.onload = startMining;
     </script>
 </body>
 </html>
