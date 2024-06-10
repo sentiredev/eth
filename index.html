@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ethereum Mining</title>
+</head>
+<body>
+    <h1>Ethereum Mining</h1>
+    <button onclick="startMining()">Start Mining</button>
+    <button onclick="stopMining()">Stop Mining</button>
+    <p id="status"></p>
+
+    <script>
+        async function startMining() {
+            const response = await fetch('/start-mining', { method: 'POST' });
+            const data = await response.json();
+            document.getElementById('status').innerText = data.message;
+        }
+
+        async function stopMining() {
+            const response = await fetch('/stop-mining', { method: 'POST' });
+            const data = await response.json();
+            document.getElementById('status').innerText = data.message;
+        }
+    </script>
+</body>
+</html>
